@@ -6,11 +6,12 @@ import { Project, Version, SITE_TYPES, THEMES, MAX_HTML } from "@/lib/types";
 
 const starter = `<!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#f8f6f2;color:#191919}.nav{display:flex;justify-content:space-between;padding:22px 7%;font-weight:800}.hero{padding:70px 8%;background:linear-gradient(135deg,#f8f6f2,#e7e0d6)}h1{font-size:clamp(38px,8vw,70px);line-height:1.05;max-width:700px;margin:0 0 20px}p{line-height:1.8;color:#5b5b5b;max-width:600px}.btn{display:inline-block;margin-top:12px;padding:13px 18px;background:#171717;color:white;text-decoration:none;border-radius:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;padding:28px 8%}.card{border-radius:12px;background:#e4ddd2;padding:25px;min-height:120px;font-weight:700}.foot{padding:25px 8%;color:#777}</style></head>
-<body><nav class="nav"><span>YOUR BRAND</span><span>หน้าแรก　 บริการ　 ติดต่อ</span></nav><main class="hero"><h1>ไอเดียของคุณ<br>เริ่มต้นที่นี่</h1><p>นี่คือตัวอย่างเว็บไซต์ของคุณ อธิบายไอเดียทางด้านซ้ายเพื่อสร้างเว็บไซต์ใหม่ด้วย AI</p><a class="btn" href="#contact">เริ่มต้นเลย →</a></main><section class="grid"><div class="card">บริการของเรา</div><div class="card">ผลงานของเรา</div><div class="card">ติดต่อเรา</div></section><footer id="contact" class="foot">© YOUR BRAND</footer></body></html>`;
+<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#f8f6f2;color:#191919}.nav{display:flex;justify-content:space-between;padding:22px 7%;font-weight:800}.hero{display:grid;grid-template-columns:1.2fr 0.8fr;gap:28px;padding:64px 7% 12px;background:linear-gradient(135deg,#f8f1ff,#f5f1e8);align-items:center}.hero h1{font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.05;margin:0 0 12px}.hero p{font-size:1.08rem;line-height:1.8;color:#473d4d;margin:0 0 24px} .cta{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-block;padding:14px 22px;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid transparent}.btn.primary{background:#191919;color:#fff}.btn.secondary{border-color:rgba(25,25,25,.2);color:#191919;background:#fff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 7% 72px}.card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 20px 50px rgba(27,24,50,.08)}.card h3{margin:0 0 10px;font-size:1.15rem}.card p{margin:0;color:#5c5564;line-height:1.7}.section{padding:0 7% 24px}.section h2{font-size:2rem;margin:0 0 16px}.feature{display:flex;gap:18px;align-items:start;padding:20px 0;border-top:1px solid rgba(25,25,25,.08)}.feature strong{display:block;margin-bottom:6px} .mini{display:inline-block;padding:8px 10px;border-radius:10px;background:#efe7ff;color:#47267d;font-weight:700;margin-bottom:8px}.meta{font-size:0.9rem;color:#6e6377;padding:24px 7% 50px}.@media (max-width:860px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.nav{padding:18px 5%}.hero,.grid,.section,.meta{padding-left:5%;padding-right:5%}}</style></head>
+<body><nav class="nav"><span>YOUR BRAND</span><span>หน้าแรก　 บริการ　 ติดต่อ</span></nav><main class="hero"><div><div class="mini">NEW DROP</div><h1>ไอเดียของคุณ<br>เริ่มจากที่นี่</h1><p>ออกแบบประสบการณ์ที่ขายได้ด้วยสไตล์ที่สะอาด ทันสมัย และตรงกับกลุ่มเป้าหมาย</p><div class="cta"><a class="btn primary" href="#services">ดูบริการ</a><a class="btn secondary" href="#contact">ติดต่อเรา</a></div></div><div class="card"><h3>แบรนด์ที่ชัดเจน</h3><p>เราเชื่อว่าร้านค้าที่ดีต้องให้ความรู้สึกถึงคุณภาพตั้งแต่ครั้งแรกที่เห็น</p><div class="mini" style="margin-top:18px">มูลค่า +42%</div></div></div></main><section class="section" id="services"><h2>บริการของเรา</h2><div class="feature"><div style="width:18px;height:18px;border-radius:50%;background:#8b5cf6"></div><div><strong>ออกแบบเว็บไซต์</strong><span>สร้างหน้า landing page ที่สะดุดตาและเข้าถึงง่ายบนมือถือ</span></div></div><div class="feature"><div style="width:18px;height:18px;border-radius:50%;background:#f59e0b"></div><div><strong>การตลาดดิจิทัล</strong><span>วางแผนคอนเทนต์และประสบการณ์ผู้ใช้ให้สอดคล้องกับเป้าหมายธุรกิจ</span></div></div><div class="feature"><div style="width:18px;height:18px;border-radius:50%;background:#10b981"></div><div><strong>ปรับปรุงประสิทธิภาพ</strong><span>ลดเวลาโหลด เพิ่มความน่าเชื่อถือ และทำให้ผู้ใช้เข้าถึงข้อมูลได้เร็วขึ้น</span></div></div></section><section class="section"><h2>ทำไมถึงเลือกเรา</h2><div class="grid"><div class="card"><h3>Responsive</h3><p>ออกแบบให้แสดงผลดีทั้งมือถือ แท็บเล็ต และเดสก์ท็อป</p></div><div class="card"><h3>Fast</h3><p>โครงสร้างที่ถูกลดความซับซ้อนเพื่อให้เว็บไซต์ใช้งานเร็วขึ้น</p></div><div class="card"><h3>Clear</h3><p>ข้อความและโครงสร้างเน้นความเข้าใจ เพื่อเพิ่มอัตราการแปลง</p></div></div></section><section class="section" id="contact"><h2>ติดต่อเรา</h2><div class="card"><p>อีเมล: hello@yourbrand.co<br>โทร: 02-123-4567<br>เวลา: จันทร์–เสาร์ 9:00–18:00</p></div></section><div class="meta">© 2025 YOUR BRAND · Crafted for growth.</div></body></html>`;
 
-// CSP ฝังในพรีวิว: บล็อกการโหลด/ส่งข้อมูลออกนอกหน้า เหมือนที่หน้าเผยแพร่ใช้
-const PREVIEW_CSP = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'">`;
+// CSP ฝังในพรีวิว: บล็อกการโหลด/ส่งข้อมูลออกนอกหน้า เหมือนที่หน้าเผยแพร่ว่าไม่มี third-party request
+const PREVIEW_CSP = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'">`;
+
 function previewDoc(html: string) {
   if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, (m) => m + PREVIEW_CSP);
   if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, (m) => m + PREVIEW_CSP);
@@ -27,7 +28,7 @@ type Device = keyof typeof DEVICES;
 const MAX_VERSIONS = 20;
 
 export default function Home() {
-  const [prompt, setPrompt] = useState("ร้านเสื้อผ้ามือสองสไตล์มินิมอล มีหน้าแรก หน้าสินค้า เกี่ยวกับร้าน และติดต่อ รองรับมือถือ");
+  const [prompt, setPrompt] = useState("ร้านเสื้อผ้ามือสองสไตล์มินิมอล มีหน้าแรก หน้าสินค้า เกี่ยวกับร้าน และติดต่อ");
   const [title, setTitle] = useState("โปรเจกต์แรกของฉัน");
   const [siteType, setSiteType] = useState<string>("auto");
   const [customSiteType, setCustomSiteType] = useState("");
@@ -71,7 +72,7 @@ export default function Home() {
     if (authError) {
       if (authError === "otp_expired" || authError === "access_denied") {
         setConfirmationNeeded(true);
-        setError("ลิงก์ยืนยันหมดอายุหรือถูกใช้แล้ว กดส่งอีเมลยืนยันซ้ำเพื่อรับลิงก์ใหม่");
+        setError("ลิงก์ยืนยันหมดอายุหรือถูกใช้แล้ว กดส่งอีเมลยืนยันซ้ำเพื่อรับลิงก์ยืนยันใหม่");
       } else {
         setError("ลิงก์ยืนยันไม่ถูกต้องหรือหมดอายุ กรุณาขอลิงก์ใหม่");
       }
@@ -133,7 +134,7 @@ export default function Home() {
     const { data, error } = await getSupabase().from("project_versions").select("id,label,html,created_at").eq("project_id", projectId).order("created_at", { ascending: false }).limit(MAX_VERSIONS);
     if (error) {
       if (error.code === "PGRST205") {
-        setError("ยังไม่ได้สร้างตารางประวัติเวอร์ชันใน Supabase: รันไฟล์ supabase/schema.sql ใน SQL Editor");
+        setError("ยังไม่ได้สร้างตารางประวัติเวอร์ชันใน Supabase: รันไฟล์ supabase/schema.sql ใน SQL Editor ก่อนใช้งาน");
       } else {
         fail(error, "โหลดประวัติเวอร์ชันไม่สำเร็จ");
       }
@@ -173,7 +174,7 @@ export default function Home() {
       if (result.error) throw result.error;
       if (mode === "signup" && !result.data.session) {
         setConfirmationNeeded(true);
-        setMessage("สมัครแล้ว แต่ต้องยืนยันอีเมลก่อนเข้าสู่ระบบ: เปิดลิงก์จากอีเมล Supabase (เช็กจดหมายขยะด้วย) แล้วกลับมาเข้าสู่ระบบ");
+        setMessage("สมัครแล้ว แต่ต้องยืนยันอีเมลก่อนเข้าสู่ระบบ: เปิดลิงก์จากอีเมลที่ส่งมา");
       } else {
         setLoggedIn(true);
         setMessage(mode === "signup" ? "สมัครและเข้าสู่ระบบแล้ว" : "เข้าสู่ระบบแล้ว");
@@ -185,13 +186,13 @@ export default function Home() {
       if (normalized.includes("invalid login credentials")) setError("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
       else if (normalized.includes("email not confirmed")) {
         setConfirmationNeeded(true);
-        setError("อีเมลนี้ยังไม่ได้ยืนยัน กดส่งอีเมลยืนยันซ้ำด้านล่าง แล้วเปิดลิงก์จากกล่องจดหมาย");
+        setError("อีเมลนี้ยังไม่ได้ยืนยัน กดส่งอีเมลยืนยันซ้ำด้านล่าง แล้วเปิดลิงก์ในอีเมลก่อนเข้าสู่ระบบ");
       }
-      else if (normalized.includes("user already registered") || normalized.includes("already been registered")) setError("อีเมลนี้มีบัญชีแล้ว กรุณาเข้าสู่ระบบแทน");
+      else if (normalized.includes("user already registered") || normalized.includes("already been registered")) setError("อีเมลนี้มีบัญชีแล้ว กรุณาเข้าสู่ระบบหรือรีเซ็ตรหัสผ่าน");
       else if (normalized.includes("password should be at least") || normalized.includes("password is too short")) setError("รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร");
       else if (normalized.includes("signup is disabled")) setError("ระบบปิดรับสมัครบัญชีใหม่อยู่");
-      else if (normalized.includes("too many requests") || normalized.includes("rate limit")) setError("มีการลองหลายครั้งเกินไป กรุณารอสักครู่แล้วลองใหม่");
-      else if (normalized.includes("failed to fetch") || normalized.includes("load failed") || normalized.includes("network")) setError("เชื่อมต่อ Supabase ไม่สำเร็จ กรุณาตรวจอินเทอร์เน็ตแล้วลองใหม่");
+      else if (normalized.includes("too many requests") || normalized.includes("rate limit")) setError("มีการลองหลายครั้งเกินไป กรุณารอซักครู่แล้วลองใหม่");
+      else if (normalized.includes("failed to fetch") || normalized.includes("load failed") || normalized.includes("network")) setError("เชื่อมต่อ Supabase ไม่สำเร็จ ตรวจสอบ URL และคีย์ใน .env.local");
       else fail(e, mode === "signup" ? "สมัครบัญชีไม่สำเร็จ" : "เข้าสู่ระบบไม่สำเร็จ");
       setMessage("");
     } finally {
@@ -214,7 +215,7 @@ export default function Home() {
         redirectTo: `${window.location.origin}/`
       });
       if (error) throw error;
-      setMessage("หากอีเมลนี้มีบัญชีอยู่ ระบบจะส่งลิงก์ตั้งรหัสผ่านใหม่ให้ กรุณาตรวจกล่องจดหมายและจดหมายขยะ");
+      setMessage("หากอีเมลนี้มีบัญชีอยู่ ระบบจะส่งลิงก์ตั้งรหัสผ่านใหม่ให้ กรุณาตรวจกล่องจดหมายและสแปม");
     } catch (e) {
       const message = e instanceof Error ? e.message.toLowerCase() : "";
       if (message.includes("rate limit") || message.includes("too many requests")) {
@@ -269,7 +270,7 @@ export default function Home() {
         options: { emailRedirectTo: `${window.location.origin}/` }
       });
       if (error) throw error;
-      setMessage("ส่งคำขอแล้ว กรุณาตรวจกล่องจดหมายและจดหมายขยะ หากยังไม่พบ ให้ตรวจการตั้งค่า SMTP ใน Supabase");
+      setMessage("ส่งคำขอแล้ว กรุณาตรวจกล่องจดหมายและจดหมายขยะ หากยังไม่พบ ให้ตรวจสอบโดเมนอีเมลและความถูกต้องของ Supabase");
     } catch (e) {
       const message = e instanceof Error ? e.message.toLowerCase() : "";
       if (message.includes("rate limit") || message.includes("too many requests")) {
@@ -315,7 +316,9 @@ export default function Home() {
       setError("กรุณาอธิบายเว็บไซต์อย่างน้อย 8 ตัวอักษร");
       return;
     }
-    if (dirty && !confirm("มีการแก้ไขที่ยังไม่บันทึก การสร้างใหม่จะแทนที่เนื้อหาปัจจุบัน (ย้อนกลับได้ด้วยปุ่ม ↩︎) ดำเนินการต่อหรือไม่?")) return;
+    if (dirty && !confirm("มีการแก้ไขที่ยังไม่บันทึก การสร้างใหม่จะแทนที่เนื้อหาปัจจุบัน คุณต้องการดำเนินการต่อหรือไม่?")) {
+      return;
+    }
     setBusy(true); setError(""); setMessage("AI กำลังออกแบบเว็บไซต์... (ใช้เวลาประมาณ 10–40 วินาที)");
     try {
       const themeHint = theme === "custom"
@@ -383,7 +386,7 @@ export default function Home() {
         setMessage("บันทึกโปรเจกต์แล้ว แต่จัดการประวัติเวอร์ชันไม่สำเร็จ");
         setError(historyError.message);
       } else {
-        setMessage(result.data.published ? "บันทึกแล้ว — หน้าเว็บที่เผยแพร่อัปเดตตามด้วย" : "บันทึกโปรเจกต์แล้ว");
+        setMessage(result.data.published ? "บันทึกแล้ว — หน้าเว็บที่เผยแพร่อัปเดตตามด้วย" : "บันทึกแล้ว — สามารถเผยแพร่และแชร์ได้ทันที");
       }
       await Promise.all([loadProjects(), loadVersions(id)]);
     } catch (e) { fail(e, "บันทึกไม่สำเร็จ"); }
@@ -392,7 +395,9 @@ export default function Home() {
 
   async function togglePublish() {
     if (!activeId) { setError("กรุณาบันทึกโปรเจกต์ก่อนเผยแพร่"); return; }
-    if (!published && !confirm("เผยแพร่แล้วทุกคนที่มีลิงก์จะเปิดดูเว็บนี้ได้ ตรวจสอบเนื้อหา (ไม่มีข้อมูลส่วนตัว/คำกล่าวอ้างที่ไม่จริง) แล้วหรือยัง?")) return;
+    if (!published && !confirm("เผยแพร่แล้วทุกคนที่มีลิงก์จะเปิดดูเว็บนี้ได้ ตรวจสอบเนื้อหาก่อนทำต่อหรือไม่?")) {
+      return;
+    }
     setError("");
     try {
       const next = !published;
@@ -410,7 +415,9 @@ export default function Home() {
   }
 
   function openProject(p: Project) {
-    if (dirty && !confirm("มีการแก้ไขที่ยังไม่บันทึก เปิดโปรเจกต์อื่นและทิ้งการแก้ไขนี้หรือไม่?")) return;
+    if (dirty && !confirm("มีการแก้ไขที่ยังไม่บันทึก เปิดโปรเจกต์อื่นและทิ้งการแก้ไขนี้หรือไม่?")) {
+      return;
+    }
     setActiveId(p.id); setTitle(p.title); setPrompt(p.prompt); setHtml(p.html); setSavedHtml(p.html);
     setPublished(Boolean(p.published)); setSlug(p.slug ?? null); setUndoStack([]);
     setMessage("เปิดโปรเจกต์: " + p.title); setError(""); loadVersions(p.id);
@@ -422,7 +429,9 @@ export default function Home() {
   }
 
   async function deleteProject(id: string) {
-    if (!confirm("ต้องการลบโปรเจกต์นี้ถาวรหรือไม่? (รวมประวัติเวอร์ชันและลิงก์ที่เผยแพร่)")) return;
+    if (!confirm("ต้องการลบโปรเจกต์นี้ถาวรหรือไม่? (รวมประวัติเวอร์ชันและลิงก์ที่เผยแพร่)")) {
+      return;
+    }
     try {
       const { error } = await getSupabase().from("projects").delete().eq("id", id);
       if (error) throw error;
@@ -442,7 +451,7 @@ export default function Home() {
 
   return <main className="wrap">
     <header className="top"><div className="brand">✦ Web<span>Gen</span> AI</div><div className="pill">v0.3 · AI BUILDER</div></header>
-    <section className="hero"><div className="eyebrow">YOUR IDEA → YOUR WEBSITE</div><h1>สร้างเว็บไซต์ด้วย<br/><span className="gradient">AI ของคุณเอง</span></h1><p>พิมพ์คำอธิบายภาษาไทย ให้ AI สร้างเว็บ สั่งแก้ต่อได้ ย้อนเวอร์ชัน และเผยแพร่เป็นลิงก์</p></section>
+    <section className="hero"><div className="eyebrow">YOUR IDEA → YOUR WEBSITE</div><h1>สร้างเว็บไซต์ด้วย<br/><span className="gradient">AI ของคุณ</span></h1><p>สร้างหน้าเว็บแบบสั้น ๆ ที่สวยและใช้งานได้จริง โดยใช้ AI สำหรับออกแบบและแก้ไขได้ทันที</p></section>
     <div className="layout">
       <section className="panel">
         <h2>1. บัญชีผู้ใช้</h2>
@@ -460,14 +469,14 @@ export default function Home() {
           : loggedIn && authMode !== "reset-password" ? <div className="row"><span className="muted" style={{flex:2}}>เข้าสู่ระบบแล้ว</span><button className="btn danger" onClick={signOut}>ออกจากระบบ</button></div>
           : authMode === "reset-password" ? <>
             <label htmlFor="new-pw">รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label>
-            <input id="new-pw" type="password" value={newPassword} onChange={e=>setNewPassword(e.target.value)} autoComplete="new-password" onKeyDown={e=>{if(e.key==="Enter"&&!authBusy) updatePassword();}}/>
+            <input id="new-pw" type="password" value={newPassword} onChange={e=>setNewPassword(e.target.value)} autoComplete="new-password" onKeyDown={e=>{if(e.key==="Enter"&&!authBusy) updatePassword();}} />
             <button className="btn secondary" style={{width:"100%",marginTop:10}} disabled={authBusy} onClick={updatePassword}>{authBusy ? "กำลังบันทึก..." : "บันทึกรหัสผ่านใหม่"}</button>
           </>
           : <>
-            <label htmlFor="em">อีเมล</label><input id="em" type="email" value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="you@example.com" autoComplete="email"/>
+            <label htmlFor="em">อีเมล</label><input id="em" type="email" value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" />
             {authMode === "signin" ? <>
-              <label htmlFor="pw">รหัสผ่าน (สมัครใหม่อย่างน้อย 6 ตัว)</label><input id="pw" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="รหัสผ่าน" autoComplete="current-password" onKeyDown={e=>{ if (e.key==="Enter" && !authBusy) auth("signin"); }}/>
-              <div className="row" style={{marginTop:10}}><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signin")}>{authBusy ? "กำลังดำเนินการ..." : "เข้าสู่ระบบ"}</button><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signup")}>สมัครบัญชี</button></div>
+              <label htmlFor="pw">รหัสผ่าน</label><input id="pw" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••" autoComplete="current-password" onKeyDown={e=>{if(e.key==="Enter"&&!authBusy) auth("signin");}} />
+              <div className="row" style={{marginTop:10}}><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signin")}>{authBusy ? "กำลังดำเนินการ..." : "เข้าสู่ระบบ"}</button><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signup")}>{authBusy ? "กำลังสมัคร..." : "สมัครสมาชิก"}</button></div>
               <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("reset-request");setError("");setMessage("");}}>ลืมรหัสผ่าน?</button>
               {confirmationNeeded && <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={resendConfirmation}>ส่งอีเมลยืนยันซ้ำ</button>}
             </> : <>
@@ -483,27 +492,27 @@ export default function Home() {
         <input id="ti" value={title} onChange={e=>setTitle(e.target.value)} placeholder="ชื่อเว็บไซต์" maxLength={100}/>
         <label>ประเภทเว็บไซต์</label>
         <div className="chips">
-          <button className={"chip"+(siteType==="auto"?" active":"")} onClick={()=>setSiteType("auto")}>✦ ให้ AI วิเคราะห์<small>เลือกประเภทและส่วนต่างๆ จากข้อมูลที่ให้</small></button>
+          <button className={"chip"+(siteType==="auto"?" active":"")} onClick={()=>setSiteType("auto")}>✦ ให้ AI วิเคราะห์<small>เลือกประเภทและโครงสร้างอัตโนมัติ</small></button>
           {SITE_TYPES.map(t=><button key={t.id} className={"chip"+(siteType===t.id?" active":"")} onClick={()=>setSiteType(t.id)}>{t.icon} {t.name}<small>{t.hint}</small></button>)}
           <button className={"chip"+(siteType==="custom"?" active":"")} onClick={()=>setSiteType("custom")}>＋ ระบุประเภทเอง</button>
         </div>
-        {siteType==="custom" && <input aria-label="ประเภทเว็บไซต์ที่ต้องการ" value={customSiteType} onChange={e=>setCustomSiteType(e.target.value)} maxLength={120} placeholder="เช่น เว็บคอร์สเรียนภาษาออนไลน์"/>}
+        {siteType==="custom" && <input aria-label="ประเภทเว็บไซต์ที่ต้องการ" value={customSiteType} onChange={e=>setCustomSiteType(e.target.value)} placeholder="เช่น เว็บไซต์บริษัทรับเหมาก่อสร้าง" />}
         <label>ธีมสี</label>
         <div className="chips">
           {THEMES.map(t=><button key={t.id} className={"chip"+(theme===t.id?" active":"")} onClick={()=>setTheme(t.id)}>{t.icon} {t.name}</button>)}
           <button className={"chip"+(theme==="custom"?" active":"")} onClick={()=>setTheme("custom")}>🎨 เลือกสีเอง</button>
         </div>
-        {theme==="custom" && <div className="row" style={{marginTop:8}}><label htmlFor="brand-color" style={{margin:0,alignSelf:"center"}}>สีหลักของแบรนด์</label><input id="brand-color" aria-label="เลือกสีหลักของเว็บไซต์" type="color" value={customColor} onChange={e=>setCustomColor(e.target.value)} style={{width:56,height:42,padding:4,flex:"0 0 56px"}}/><span className="muted">{customColor.toUpperCase()}</span></div>}
+        {theme==="custom" && <div className="row" style={{marginTop:8}}><label htmlFor="brand-color" style={{margin:0,alignSelf:"center"}}>สีหลักของแบรนด์</label><input id="brand-color" type="color" value={customColor} onChange={e=>setCustomColor(e.target.value)} /></div>}
         <label htmlFor="pr">อธิบายเว็บไซต์ที่ต้องการ</label>
-        <textarea id="pr" value={prompt} onChange={e=>setPrompt(e.target.value)} maxLength={5000} placeholder="เช่น ร้านกาแฟในเชียงใหม่ มีเมนู ภาพบรรยากาศ แผนที่ และเวลาเปิด-ปิด..."/>
-        <button className="btn primary" disabled={busy || !loggedIn || outOfQuota} onClick={generate}>{busy ? "กำลังทำงาน..." : !loggedIn ? "เข้าสู่ระบบเพื่อสร้างด้วย AI" : outOfQuota ? "ใช้โควตาครบแล้ว" : "✦ สร้างเว็บด้วย AI"}</button>
+        <textarea id="pr" value={prompt} onChange={e=>setPrompt(e.target.value)} maxLength={5000} placeholder="เช่น ร้านกาแฟในเชียงใหม่ มีหน้าแรก เมนู รีวิว และติดต่อ" />
+        <button className="btn primary" disabled={busy || !loggedIn || outOfQuota} onClick={generate}>{busy ? "กำลังทำงาน..." : !loggedIn ? "เข้าสู่ระบบก่อนสร้างเว็บ" : outOfQuota ? "โควตา AI หมดแล้ว" : "สร้างเว็บไซต์ด้วย AI"}</button>
 
         <div className="box">
           <h3>✎ สั่ง AI แก้เว็บปัจจุบัน</h3>
-          <textarea style={{minHeight:70}} value={editText} onChange={e=>setEditText(e.target.value)} maxLength={3000} placeholder="เช่น เปลี่ยนสีปุ่มเป็นเขียว, เพิ่มส่วนคำถามที่พบบ่อย, ทำให้ฟอนต์หัวข้อใหญ่ขึ้น"/>
+          <textarea style={{minHeight:70}} value={editText} onChange={e=>setEditText(e.target.value)} maxLength={3000} placeholder="เช่น เปลี่ยนสีปุ่มเป็นสีเขียว เพิ่มหัวเรื่องที่ชัดขึ้น" />
           <div className="row" style={{marginTop:8}}>
             <button className="btn secondary" disabled={busy || !loggedIn || outOfQuota || editText.trim().length < 4} onClick={editWithAI}>ส่งคำสั่งแก้ไข</button>
-            <button className="btn secondary" disabled={!undoStack.length} onClick={undo} title="ย้อนกลับการเปลี่ยนแปลงล่าสุด">↩︎ ย้อนกลับ ({undoStack.length})</button>
+            <button className="btn secondary" disabled={!undoStack.length} onClick={undo} title="ย้อนกลับการเปลี่ยนแปลงล่าสุด">↩︎ ย้อนกลับ</button>
           </div>
         </div>
 
@@ -516,15 +525,15 @@ export default function Home() {
 
         {activeId && <div className="box">
           <h3><span className="dot" style={{background:published?"#6de7d1":"#5b6685"}}/>เผยแพร่เว็บไซต์</h3>
-          <p className="muted" style={{margin:0}}>{published ? "เว็บนี้เปิดให้ทุกคนที่มีลิงก์เข้าชมได้" : "ตอนนี้เป็นส่วนตัว มีแค่คุณที่เห็น"}</p>
-          {published && publicUrl && <div className="linkrow"><input readOnly value={publicUrl} onFocus={e=>e.currentTarget.select()} aria-label="ลิงก์เว็บไซต์"/><button className="btn secondary" onClick={copyLink}>{copied ? "คัดลอกแล้ว" : "คัดลอก"}</button><a className="btn secondary" href={publicUrl} target="_blank" rel="noreferrer" style={{textDecoration:"none"}}>เปิด</a></div>}
-          <button className={"btn "+(published?"danger":"secondary")} style={{marginTop:10,width:"100%"}} onClick={togglePublish}>{published ? "ยกเลิกการเผยแพร่" : "🌐 เผยแพร่เป็นลิงก์"}</button>
+          <p className="muted" style={{margin:0}}>{published ? "เว็บนี้เปิดให้ทุกคนที่มีลิงก์เข้าชมได้" : "ตอนนี้เว็บยังไม่เปิดให้สาธารณะ"}</p>
+          {published && publicUrl && <div className="linkrow"><input readOnly value={publicUrl} onFocus={e=>e.currentTarget.select()} aria-label="ลิงก์เว็บไซต์"/><button className="btn secondary" onClick={copyLink}>{copied ? "คัดลอกแล้ว" : "คัดลอก"}</button></div>}
+          <button className={"btn "+(published?"danger":"secondary")} style={{marginTop:10,width:"100%"}} onClick={togglePublish}>{published ? "ยกเลิกการเผยแพร่" : "เผยแพร่เว็บไซต์"}</button>
         </div>}
 
         {activeId && <div className="box">
           <h3>🕘 ประวัติเวอร์ชัน</h3>
-          {versions.length === 0 ? <p className="muted" style={{margin:0}}>ยังไม่มีเวอร์ชัน — ทุกครั้งที่กดบันทึกจะเก็บสำเนาไว้ (สูงสุด {MAX_VERSIONS})</p>
-            : <div className="versions">{versions.map(v=><div className="version" key={v.id}><span>{new Date(v.created_at).toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"})} · {v.label}</span><button onClick={()=>restoreVersion(v)}>กู้คืน</button></div>)}</div>}
+          {versions.length === 0 ? <p className="muted" style={{margin:0}}>ยังไม่มีเวอร์ชัน — ทุกครั้งที่กดบันทึกจะถูกบันทึกไว้ที่นี่</p>
+            : <div className="versions">{versions.map(v=><div className="version" key={v.id}><span>{new Date(v.created_at).toLocaleString("th-TH", {dateStyle:"short", timeStyle:"short"})} · {v.label}</span><button className="btn text" onClick={()=>restoreVersion(v)}>กู้คืน</button></div>)}</div>}
         </div>}
       </section>
 
@@ -538,14 +547,14 @@ export default function Home() {
         {tab==="preview"
           ? <div className="stage"><iframe className="preview" title="Website preview" sandbox="allow-forms allow-scripts" srcDoc={srcDoc} style={{width: DEVICES[device].w || "100%"}}/></div>
           : <textarea className="code" spellCheck={false} value={html} onChange={e=>setHtml(e.target.value)} aria-label="แก้ไขโค้ด HTML"/>}
-        <p className="muted" style={{marginTop:8}}>พรีวิวทำงานในกรอบแยกที่บล็อกการเชื่อมต่อออกนอกหน้า · {Math.round(html.length/1024)} KB</p>
+        <p className="muted" style={{marginTop:8}}>พรีวิวทำงานในกรอบแยกที่บล็อกการเชื่อมต่อออกนอกหน้า เพื่อความปลอดภัยของข้อมูล</p>
 
         <h2 style={{marginTop:20}}>โปรเจกต์ที่บันทึกไว้</h2>
         {!loggedIn && <p className="muted">เข้าสู่ระบบเพื่อดูรายการโปรเจกต์ของคุณ</p>}
         {loggedIn && projects.length === 0 && <p className="muted">ยังไม่มีโปรเจกต์ที่บันทึก</p>}
-        <div className="projects">{projects.map(p=><div className="project" key={p.id} style={p.id===activeId?{borderColor:"#9d8cff"}:undefined}><button className="project-name" onClick={()=>openProject(p)}>{p.published && <span className="dot" title="เผยแพร่แล้ว"/>}{p.title}</button><button onClick={()=>deleteProject(p.id)}>ลบ</button></div>)}</div>
+        <div className="projects">{projects.map(p=><div className="project" key={p.id} style={p.id===activeId?{borderColor:"#9d8cff"}:undefined}><button className="project-name" onClick={()=>openProject(p)}>{p.title || "โปรเจกต์ไม่มีชื่อ"}</button><span className="project-date">{p.updated_at ? new Date(p.updated_at).toLocaleString("th-TH", {dateStyle:"short", timeStyle:"short"}) : ""}</span><button className="project-delete" onClick={()=>deleteProject(p.id)}>ลบ</button></div>)}</div>
       </section>
     </div>
-    <div className="footer">WebGen AI v0.3 · Next.js + Supabase + Gemini<br/>HTML ที่ AI สร้างอาจมีข้อผิดพลาด ตรวจสอบก่อนเผยแพร่เสมอ</div>
+    <div className="footer">WebGen AI v0.3 · Next.js + Supabase + Gemini<br/>HTML ที่ AI สร้างอาจมีข้อผิดพลาด ตรวจสอบก่อนเผยแพร่</div>
   </main>;
 }
