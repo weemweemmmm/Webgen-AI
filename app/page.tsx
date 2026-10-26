@@ -455,7 +455,17 @@ export default function Home() {
     <div className="layout">
       <section className="panel">
         <h2>1. บัญชีผู้ใช้</h2>
-        {!configured ? <p className="error">ยังไม่ได้ตั้งค่า Supabase หรือ Gemini กรุณาคัดลอก <code>.env.example</code> เป็น <code>.env.local</code> แล้วใส่ค่า <code>NEXT_PUBLIC_SUPABASE_URL</code>, <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>, <code>GEMINI_API_KEY</code> และ <code>GEMINI_MODEL</code> ก่อนใช้งาน</p>
+        {!configured ? <div className="error" role="alert" style={{ marginTop: 12, padding: 14, border: "1px solid #70404a", borderRadius: 12, background: "#241821", fontSize: 13 }}>
+            <strong>ยังไม่ได้ตั้งค่า Supabase หรือ Gemini</strong>
+            <p className="muted" style={{ margin: "8px 0" }}>กรุณาคัดลอกไฟล์ <code>.env.example</code> เป็น <code>.env.local</code> แล้วกรอกค่าต่อไปนี้ให้ครบถ้วนก่อนใช้งาน:</p>
+            <ul className="muted" style={{ margin: "8px 0", paddingLeft: 22 }}>
+              <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
+              <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
+              <li><code>GEMINI_API_KEY</code></li>
+              <li><code>GEMINI_MODEL</code></li>
+            </ul>
+            <p className="muted" style={{ margin: "8px 0 0" }}>หากต้องการใช้งานเต็มรูปแบบ ให้เปิด Supabase Dashboard &gt; SQL Editor แล้วรันไฟล์ <code>supabase/schema.sql</code> ก่อนรีโหลดหน้าอีกครั้ง</p>
+          </div>
           : loggedIn && authMode !== "reset-password" ? <div className="row"><span className="muted" style={{flex:2}}>เข้าสู่ระบบแล้ว</span><button className="btn danger" onClick={signOut}>ออกจากระบบ</button></div>
           : authMode === "reset-password" ? <>
             <label htmlFor="new-pw">รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label>
