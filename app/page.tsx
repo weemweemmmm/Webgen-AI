@@ -40,10 +40,11 @@ export default function Home() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [authMode, setAuthMode] = useState<"signin" | "reset-request" | "reset-password">("signin");
+  const [authMode, setAuthMode] = useState<"signup" | "signin" | "reset-request" | "reset-password">("signup");
   const [authBusy, setAuthBusy] = useState(false);
   const [confirmationNeeded, setConfirmationNeeded] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [versions, setVersions] = useState<Version[]>([]);
   const [busy, setBusy] = useState(false);
@@ -65,7 +66,10 @@ export default function Home() {
   const publicUrl = slug && typeof window !== "undefined" ? `${window.location.origin}/p/${slug}` : "";
 
   useEffect(() => {
-    if (!configured) return;
+    if (!configured) {
+      setAuthReady(true);
+      return;
+    }
     const sb = getSupabase();
     const params = new URLSearchParams(window.location.search);
     const authError = params.get("error_code") || params.get("error");
@@ -79,10 +83,15 @@ export default function Home() {
       window.history.replaceState({}, "", window.location.pathname);
     }
     sb.auth.getSession().then(({ data, error }) => {
-      if (error) { fail(error, "ตรวจสอบสถานะเข้าสู่ระบบไม่สำเร็จ"); return; }
+      if (error) { fail(error, "ตรวจสอบสถานะเข้าสู่ระบบไม่สำเร็จ"); setAuthReady(true); return; }
       if (data.session) { setLoggedIn(true); loadProjects(); refreshQuota(); }
-    }).catch((error: unknown) => fail(error, "เชื่อมต่อ Supabase ไม่สำเร็จ"));
+      setAuthReady(true);
+    }).catch((error: unknown) => {
+      fail(error, "เชื่อมต่อ Supabase ไม่สำเร็จ");
+      setAuthReady(true);
+    });
     const { data: listener } = sb.auth.onAuthStateChange((event, session) => {
+      setAuthReady(true);
       setLoggedIn(Boolean(session));
       if (event === "PASSWORD_RECOVERY") {
         setAuthMode("reset-password");
@@ -449,43 +458,74 @@ export default function Home() {
   const pct = quota ? Math.min(100, Math.round((quota.used / quota.limit) * 100)) : 0;
   const outOfQuota = quota ? quota.used >= quota.limit : false;
 
+  if (configured && !authReady) {
+    return <main className="wrap auth-screen">
+      <header className="top"><div className="brand">✦ Web<span>Gen</span> AI</div><div className="pill">v0.3 · AI BUILDER</div></header>
+      <section className="panel auth-panel"><p className="status" role="status">กำลังตรวจสอบบัญชีผู้ใช้...</p></section>
+    </main>;
+  }
+
+  if (!configured || !loggedIn || authMode === "reset-password") {
+    const authTitle = !configured
+      ? "ตั้งค่าระบบก่อนสมัครสมาชิก"
+      : authMode === "signup" ? "สร้างบัญชีเพื่อเริ่มใช้งาน" : authMode === "signin" ? "เข้าสู่ระบบ" : authMode === "reset-password" ? "ตั้งรหัสผ่านใหม่" : "ลืมรหัสผ่าน";
+
+    return <main className="wrap auth-screen">
+      <header className="top"><div className="brand">✦ Web<span>Gen</span> AI</div><div className="pill">v0.3 · AI BUILDER</div></header>
+      <section className="hero"><div className="eyebrow">YOUR IDEA → YOUR WEBSITE</div><h1>สร้างเว็บไซต์ด้วย<br/><span className="gradient">AI ของคุณ</span></h1><p>สมัครสมาชิกหรือเข้าสู่ระบบก่อน เพื่อบันทึกและจัดการเว็บไซต์ของคุณอย่างปลอดภัย</p></section>
+      <section className="panel auth-panel">
+        <h2>{authTitle}</h2>
+        {!configured
+          ? <div className="error" role="alert" style={{ marginTop: 12, padding: 14, border: "1px solid #70404a", borderRadius: 12, background: "#241821", fontSize: 13 }}>
+              <strong>ยังไม่ได้ตั้งค่า Supabase</strong>
+              <p className="muted" style={{ margin: "8px 0" }}>การสมัครและเข้าสู่ระบบต้องตั้งค่า Supabase ก่อน: คัดลอก <code>.env.example</code> เป็น <code>.env.local</code> แล้วกรอกค่า:</p>
+              <ul className="muted" style={{ margin: "8px 0", paddingLeft: 22 }}>
+                <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
+                <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
+              </ul>
+              <p className="muted" style={{ margin: "8px 0 0" }}>หลังตั้งค่าแล้วให้เริ่มเซิร์ฟเวอร์ใหม่ ส่วนการสร้างเว็บไซต์ด้วย AI ต้องตั้ง <code>GEMINI_API_KEY</code> เพิ่ม และรัน <code>supabase/schema.sql</code> ใน Supabase SQL Editor</p>
+            </div>
+          : <form onSubmit={(event) => {
+              event.preventDefault();
+              if (authMode === "signup" || authMode === "signin") void auth(authMode);
+              else if (authMode === "reset-request") void requestPasswordReset();
+              else void updatePassword();
+            }}>
+              {authMode === "reset-password" ? <>
+                <label htmlFor="new-pw">รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label>
+                <input id="new-pw" type="password" value={newPassword} onChange={e=>setNewPassword(e.target.value)} autoComplete="new-password" minLength={6} required />
+                <button className="btn primary" style={{width:"100%"}} disabled={authBusy}>{authBusy ? "กำลังบันทึก..." : "บันทึกรหัสผ่านใหม่"}</button>
+              </> : <>
+                <label htmlFor="em">อีเมล</label>
+                <input id="em" type="email" value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" required />
+                {authMode !== "reset-request" && <>
+                  <label htmlFor="pw">รหัสผ่าน</label>
+                  <input id="pw" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="อย่างน้อย 6 ตัวอักษร" autoComplete={authMode === "signup" ? "new-password" : "current-password"} minLength={6} required />
+                </>}
+                <button className="btn primary" style={{width:"100%"}} disabled={authBusy}>
+                  {authBusy ? "กำลังดำเนินการ..." : authMode === "signup" ? "สมัครสมาชิก" : authMode === "signin" ? "เข้าสู่ระบบ" : "ส่งลิงก์ตั้งรหัสผ่าน"}
+                </button>
+              </>}
+              {authMode === "signin" && <button type="button" className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("reset-request");setError("");setMessage("");}}>ลืมรหัสผ่าน?</button>}
+              {authMode === "reset-request" && <button type="button" className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("signin");setError("");setMessage("");}}>กลับไปเข้าสู่ระบบ</button>}
+              {authMode === "signup" && <button type="button" className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("signin");setError("");setMessage("");}}>มีบัญชีอยู่แล้ว? เข้าสู่ระบบ</button>}
+              {authMode === "signin" && <button type="button" className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("signup");setError("");setMessage("");}}>ยังไม่มีบัญชี? สมัครสมาชิก</button>}
+              {confirmationNeeded && <button type="button" className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={resendConfirmation}>ส่งอีเมลยืนยันซ้ำ</button>}
+            </form>}
+        {error && <p className="error" role="alert" style={{marginTop:12}}>{error}</p>}
+        {message && <div className="status" role="status">{message}</div>}
+      </section>
+      <div className="footer">WebGen AI v0.3 · สมัครสมาชิกเพื่อเข้าใช้งานพื้นที่สร้างเว็บไซต์</div>
+    </main>;
+  }
+
   return <main className="wrap">
     <header className="top"><div className="brand">✦ Web<span>Gen</span> AI</div><div className="pill">v0.3 · AI BUILDER</div></header>
     <section className="hero"><div className="eyebrow">YOUR IDEA → YOUR WEBSITE</div><h1>สร้างเว็บไซต์ด้วย<br/><span className="gradient">AI ของคุณ</span></h1><p>สร้างหน้าเว็บแบบสั้น ๆ ที่สวยและใช้งานได้จริง โดยใช้ AI สำหรับออกแบบและแก้ไขได้ทันที</p></section>
     <div className="layout">
       <section className="panel">
         <h2>1. บัญชีผู้ใช้</h2>
-        {!configured ? <div className="error" role="alert" style={{ marginTop: 12, padding: 14, border: "1px solid #70404a", borderRadius: 12, background: "#241821", fontSize: 13 }}>
-            <strong>ยังไม่ได้ตั้งค่า Supabase หรือ Gemini</strong>
-            <p className="muted" style={{ margin: "8px 0" }}>กรุณาคัดลอกไฟล์ <code>.env.example</code> เป็น <code>.env.local</code> แล้วกรอกค่าต่อไปนี้ให้ครบถ้วนก่อนใช้งาน:</p>
-            <ul className="muted" style={{ margin: "8px 0", paddingLeft: 22 }}>
-              <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
-              <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
-              <li><code>GEMINI_API_KEY</code></li>
-              <li><code>GEMINI_MODEL</code></li>
-            </ul>
-            <p className="muted" style={{ margin: "8px 0 0" }}>หากต้องการใช้งานเต็มรูปแบบ ให้เปิด Supabase Dashboard &gt; SQL Editor แล้วรันไฟล์ <code>supabase/schema.sql</code> ก่อนรีโหลดหน้าอีกครั้ง</p>
-          </div>
-          : loggedIn && authMode !== "reset-password" ? <div className="row"><span className="muted" style={{flex:2}}>เข้าสู่ระบบแล้ว</span><button className="btn danger" onClick={signOut}>ออกจากระบบ</button></div>
-          : authMode === "reset-password" ? <>
-            <label htmlFor="new-pw">รหัสผ่านใหม่ (อย่างน้อย 6 ตัว)</label>
-            <input id="new-pw" type="password" value={newPassword} onChange={e=>setNewPassword(e.target.value)} autoComplete="new-password" onKeyDown={e=>{if(e.key==="Enter"&&!authBusy) updatePassword();}} />
-            <button className="btn secondary" style={{width:"100%",marginTop:10}} disabled={authBusy} onClick={updatePassword}>{authBusy ? "กำลังบันทึก..." : "บันทึกรหัสผ่านใหม่"}</button>
-          </>
-          : <>
-            <label htmlFor="em">อีเมล</label><input id="em" type="email" value={userEmail} onChange={e=>setUserEmail(e.target.value)} placeholder="you@example.com" autoComplete="email" />
-            {authMode === "signin" ? <>
-              <label htmlFor="pw">รหัสผ่าน</label><input id="pw" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="••••••" autoComplete="current-password" onKeyDown={e=>{if(e.key==="Enter"&&!authBusy) auth("signin");}} />
-              <div className="row" style={{marginTop:10}}><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signin")}>{authBusy ? "กำลังดำเนินการ..." : "เข้าสู่ระบบ"}</button><button className="btn secondary" disabled={authBusy} onClick={()=>auth("signup")}>{authBusy ? "กำลังสมัคร..." : "สมัครสมาชิก"}</button></div>
-              <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("reset-request");setError("");setMessage("");}}>ลืมรหัสผ่าน?</button>
-              {confirmationNeeded && <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={resendConfirmation}>ส่งอีเมลยืนยันซ้ำ</button>}
-            </> : <>
-              <p className="muted">กรอกอีเมลเพื่อรับลิงก์ตั้งรหัสผ่านใหม่</p>
-              <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={requestPasswordReset}>{authBusy ? "กำลังส่ง..." : "ส่งลิงก์ตั้งรหัสผ่าน"}</button>
-              <button className="btn secondary" style={{width:"100%",marginTop:8}} disabled={authBusy} onClick={()=>{setAuthMode("signin");setError("");setMessage("");}}>กลับไปเข้าสู่ระบบ</button>
-            </>}
-          </>}
-        <div className="status" role="status">{message}</div>
+        <div className="row"><span className="muted" style={{flex:2}}>เข้าสู่ระบบแล้ว</span><button className="btn danger" onClick={signOut}>ออกจากระบบ</button></div>
         {quota && <div className="quota">โควตา AI วันนี้ (24 ชม.): <b>{quota.used}/{quota.limit}</b><div className="bar"><i style={{width:pct+"%"}}/></div></div>}
 
         <label htmlFor="ti">2. ชื่อโปรเจกต์ {dirty && <span className="dirty">● ยังไม่บันทึก</span>}</label>
