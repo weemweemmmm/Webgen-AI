@@ -478,12 +478,16 @@ export default function Home() {
         {!configured
           ? <div className="error" role="alert" style={{ marginTop: 12, padding: 14, border: "1px solid #70404a", borderRadius: 12, background: "#241821", fontSize: 13 }}>
               <strong>ยังไม่ได้ตั้งค่า Supabase</strong>
-              <p className="muted" style={{ margin: "8px 0" }}>การสมัครและเข้าสู่ระบบต้องตั้งค่า Supabase ก่อน: คัดลอก <code>.env.example</code> เป็น <code>.env.local</code> แล้วกรอกค่า:</p>
+              <p className="muted" style={{ margin: "8px 0" }}>การสมัครและเข้าสู่ระบบต้องมีโปรเจกต์ Supabase ก่อน จากนั้นเพิ่มค่า 2 รายการนี้ใน Environment Variables ของ Vercel (หรือใส่ใน <code>.env.local</code> เมื่อต้องการรันในเครื่อง):</p>
               <ul className="muted" style={{ margin: "8px 0", paddingLeft: 22 }}>
                 <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
                 <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
               </ul>
-              <p className="muted" style={{ margin: "8px 0 0" }}>หลังตั้งค่าแล้วให้เริ่มเซิร์ฟเวอร์ใหม่ ส่วนการสร้างเว็บไซต์ด้วย AI ต้องตั้ง <code>GEMINI_API_KEY</code> เพิ่ม และรัน <code>supabase/schema.sql</code> ใน Supabase SQL Editor</p>
+              <p className="muted" style={{ margin: "8px 0 0" }}>หลังเพิ่มค่าใน Vercel ให้ Redeploy โปรเจกต์ ส่วนการสร้างเว็บไซต์ด้วย AI ต้องตั้ง <code>GEMINI_API_KEY</code> เพิ่ม และรัน <code>supabase/schema.sql</code> ใน Supabase SQL Editor</p>
+              <div className="setup-links">
+                <a href="https://supabase.com/dashboard" target="_blank" rel="noreferrer">เปิด Supabase Dashboard</a>
+                <a href="https://vercel.com/dashboard" target="_blank" rel="noreferrer">เปิด Vercel เพื่อเพิ่ม Environment Variables</a>
+              </div>
             </div>
           : <form onSubmit={(event) => {
               event.preventDefault();

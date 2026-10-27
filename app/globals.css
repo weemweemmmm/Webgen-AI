@@ -24,4 +24,4 @@
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6de7d1;margin-right:6px}
 .dirty{color:#ffd48a;font-size:11px;margin-left:8px}
 button:disabled{opacity:.6;cursor:not-allowed}
-.auth-screen{max-width:760px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}.auth-screen .hero{padding-top:0}.auth-panel{width:100%;max-width:520px;margin:0 auto}.auth-panel form>.btn.primary{margin-top:16px}.auth-screen .footer{margin-top:20px}
+.auth-screen{max-width:760px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}.auth-screen .hero{padding-top:0}.auth-panel{width:100%;max-width:520px;margin:0 auto}.auth-panel form>.btn.primary{margin-top:16px}.auth-screen .footer{margin-top:20px}.setup-links{display:grid;gap:8px;margin-top:12px}.setup-links a{color:#c5caff;font-size:12px;text-decoration:underline;text-underline-offset:3px}

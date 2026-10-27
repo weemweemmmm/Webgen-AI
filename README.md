@@ -18,6 +18,8 @@ The app requires Supabase for account registration and sign-in:
 3. Run `supabase/schema.sql` in the Supabase SQL Editor.
 4. Restart the development server.
 
+For a Vercel deployment, add the same Supabase values under **Project Settings → Environment Variables** instead of creating `.env.local` on Vercel, then redeploy. Set them for Production and Preview as needed.
+
 Set `GEMINI_API_KEY` in `.env.local` as well to enable AI website generation. Keep it server-only; do not add the `NEXT_PUBLIC_` prefix.
 
 ## Verify and run in production
